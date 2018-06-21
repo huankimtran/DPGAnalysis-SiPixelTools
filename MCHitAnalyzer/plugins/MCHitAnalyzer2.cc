@@ -69,7 +69,7 @@
 #include <utility>
 #include <map>
 
-#include "../Library/Pixel/Pixel.h"
+#include "../../Library/Pixel/Pixel.h"
 using namespace std;
 
 typedef int FEDID;
