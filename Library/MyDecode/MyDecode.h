@@ -1,14 +1,5 @@
 #ifndef MyDecode_H
 #define MyDecode_H
-#include <TROOT.h>
-#include <TChain.h>
-#include <TFile.h>
-#include <TF1.h>
-#include <TH2F.h>
-#include <TH1D.h>
-#include <TProfile.h>
-#include <TProfile2D.h>
-#include <TStyle.h>
 
 namespace {
 bool printErrors  = false;

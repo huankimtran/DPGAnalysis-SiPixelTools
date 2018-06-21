@@ -1,4 +1,6 @@
 #include "Pixel.h"
+#include "TROOT.h"
+
 Pixel::Pixel(Int_t eventID,Int_t fedID,Int_t layer,Int_t channel,Int_t ROC,Int_t row,Int_t col,Int_t adc){
 	_eventID=eventID;
 	_fedID=fedID;

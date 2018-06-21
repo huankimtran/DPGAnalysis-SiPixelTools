@@ -1,6 +1,6 @@
 #ifndef PIXEL_H
 #define PIXEL_H
-#include "TROOT.h"
+
 class Pixel{
 public:
 	Pixel(Int_t eventID,Int_t fedID,Int_t layer,Int_t channel,Int_t ROC,Int_t row,Int_t col,Int_t adc);
