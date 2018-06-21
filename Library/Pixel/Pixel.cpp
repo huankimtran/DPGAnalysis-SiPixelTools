@@ -16,7 +16,7 @@ void Pixel::fill(Int_t eventID, Int_t fedID,Int_t layer,MyDecode d){
 	_ROC=d.get_roc();
 	_row=d.get_row();
 	_col=d.get_col();
-	_adc=d.get_adc();
+	_adc=d.get_adc();	
 	_layer=layer;
 }
 
