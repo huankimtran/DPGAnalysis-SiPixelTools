@@ -69,11 +69,12 @@
 #include <utility>
 #include <map>
 
-#include "../../Library/Pixel/Pixel.h"
 //Configure inclusion from MyDecode.h
 #define PHASE1 
 
 #include "../../Library/MyDecode/MyDecode.h"
+
+#include "../../Library/Pixel/Pixel.h"
 
 using namespace std;
 
