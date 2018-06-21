@@ -1,7 +1,7 @@
 #ifndef MyDecode_H
 #define MyDecode_H
 
-namespace {
+namespace MyDecodeParameter{
 bool printErrors  = false;
 bool printData    = false; 
 bool printHeaders = false; 
@@ -31,7 +31,7 @@ const int fedIdBpixMax = 32;
 const bool phase1 = false;
 #endif
 }
-
+using namespace MyDecodeParameter;
 //Decoding helper functions
 class MyDecode {
 public:
