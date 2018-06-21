@@ -70,6 +70,8 @@
 #include <map>
 
 #include "../../Library/Pixel/Pixel.h"
+#include "../../Library/MyDecode/MyDecode.h"
+
 using namespace std;
 
 typedef int FEDID;
