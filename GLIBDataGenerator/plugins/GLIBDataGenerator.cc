@@ -933,7 +933,8 @@ GLIBDataGenerator::beginJob()
 // ------------ method called once each job just after ending the event loop  ------------
 void
 GLIBDataGenerator::endJob()
-{	
+{
+	ofstream f("HighFEDdata.txt");
 	cout<<"GLIBDataGenerator endJob is being called"<<endl;
 	float max=0;
 	int fedMax=-1;
@@ -945,11 +946,37 @@ GLIBDataGenerator::endJob()
 		}
 	}
 	//Convert index to FED ID
-	fedMax+=1200;
+	fedMax+=FIRST_FED_ID;
 	//Annoucing
 	cout<<"FED ID with the highest average hit:"<<fedMax<<endl;
+	cout<<"The total number of event is: "<<numbEvent<<endl;
+	cout<<"The total number of hit the FED got: "<<HitFedCount[fedMax-FIRST_FED_ID].second<<endl;
 	cout<<"The average hit of that FED is:"<<max<<endl;
-	//Filtering and put data of the FED with highest average hit into the encoder to generate GLIB files
+	cout<<"The number of zero event this FED has:"<<numbEvent-HitFedCount[fedMax-FIRST_FED_ID].first<<endl;
+	cout<<"Channel-to-layer map of this FED"<<endl;
+	for(int i=1;i<=48;i++){
+		MAP::iterator layer=fedMap.find(FEDINP(fedMax,i));
+		if(layer->second==5)
+			cout<<"Channel "<<i<<" is linked to layer FPIX"<<endl;
+		else
+			cout<<"Channel "<<i<<" is linked to layer "<<layer->second<<endl;
+	}
+	f<<"FED ID with the highest average hit:"<<fedMax<<endl;
+	f<<"The total number of event is: "<<numbEvent<<endl;
+	f<<"The total number of hit the FED got: "<<HitFedCount[fedMax-FIRST_FED_ID].second<<endl;
+	f<<"The average hit of that FED is:"<<max<<endl;
+	f<<"The number of zero event this FED has:"<<numbEvent-HitFedCount[fedMax-FIRST_FED_ID].first<<endl;
+	f<<"Channel-to-layer map of this FED"<<endl;
+	for(int i=1;i<=48;i++){
+		MAP::iterator layer=fedMap.find(FEDINP(fedMax,i));
+		if(layer->second==5)
+			f<<"Channel "<<i<<" is linked to layer FPIX"<<endl;
+		else
+			f<<"Channel "<<i<<" is linked to layer "<<layer->second<<endl;
+	}
+	f.close();
+	cout<<"Data about the FED is saved in the file named HighFedData.txt"<<endl; 
+	//Filtering and put data of the FED witih highest average hit into the encoder to generate GLIB files
 	cout<<"Filtering out the data of the FED with the highest average hit"<<endl;
 	for(unsigned int i=0;i<tree->GetEntries();i++){
 		tree->GetEntry(i);
@@ -962,6 +989,7 @@ GLIBDataGenerator::endJob()
 	//Generating GLIB bin files
 	cout<<"Generating GLIB bin files"<<endl;
 	pix.encode(fedMax);
+	cout<<"Done generating GLIB bin files"<<endl;
 }
 //Get layer from fedID and channel
 Int_t GLIBDataGenerator::getLayer(Int_t fedID,Int_t channel){
