@@ -1,17 +1,7 @@
 #include "MyDecode.h"
-#include <TROOT.h>
-#include <TChain.h>
-#include <TFile.h>
-#include <TF1.h>
-#include <TH2F.h>
-#include <TH1D.h>
-#include <TProfile.h>
-#include <TProfile2D.h>
-#include <TStyle.h>
-
 // Include the helper decoding class (how did I mange to avoid linking conflicts?)
 // /////////////////////////////////////////////////////////////////////////////
-
+using namespace MyDecodeParameter;
 int MyDecode::checkLayerLink(int fed, int chan) {
 	int layer = 0;
 	if(fed<0 || fed>31) return layer;  // return 0 for invalid of fpix

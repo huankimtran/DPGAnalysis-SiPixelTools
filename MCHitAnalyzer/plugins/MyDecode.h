@@ -1,7 +1,19 @@
 #ifndef MyDecode_H
 #define MyDecode_H
 
-namespace MyDecodeParameter{
+#include <TROOT.h>
+#include <TChain.h>
+#include <TFile.h>
+#include <TF1.h>
+#include <TH2F.h>
+#include <TH1D.h>
+#include <TProfile.h>
+#include <TProfile2D.h>
+#include <TStyle.h>
+#include <iostream>
+using namespace std;
+
+namespace MyDecodeParameter {
 bool printErrors  = false;
 bool printData    = false; 
 bool printHeaders = false; 
@@ -9,29 +21,28 @@ const bool printBX = false;
 const bool CHECK_PIXELS = true;
 const bool PRINT_BASELINE = false;
 // to store the previous pixel 
-int fed0 = -1, chan0 = -1, roc0 = -1, dcol0 = -1, pix0 =-1, count0=-1;
-int countDecodeErrors1=0, countDecodeErrors2=0;
-#ifdef PHASE1
-const int n_of_FEDs = 139; //kme 56
-const int n_of_Channels = 48; //kme 96?? -- maybe n_of_Channels = 48
-const int fedIdBpixMax = 1293; //kme 40
-const int fedIdBpixMax_sup = 93;
-const bool phase1 = true;
-#define NUMBER_FED 139
-#define MAX_COLUMN_BARREL 300
-#define MAX_ROW_BARREL 300
-#define MAX_COLUMN_CAP 300
-#define MAX_ROW_CAP 300
-#define FIRST_FED_ID 1200
-#define LAST_FED_ID 1338
-#else
-const int n_of_FEDs = 41;
-const int n_of_Channels = 36;
-const int fedIdBpixMax = 32;
-const bool phase1 = false;
-#endif
-}
-using namespace MyDecodeParameter;
+ int fed0 = -1, chan0 = -1, roc0 = -1, dcol0 = -1, pix0 =-1, count0=-1;
+ int countDecodeErrors1=0, countDecodeErrors2=0;
+ #ifdef PHASE1
+ const int n_of_FEDs = 139; //kme 56
+ const int n_of_Channels = 48; //kme 96?? -- maybe n_of_Channels = 48
+ const int fedIdBpixMax = 1293; //kme 40
+ const int fedIdBpixMax_sup = 93;
+ const bool phase1 = true;
+ #define NUMBER_FED 139
+ #define MAX_COLUMN_BARREL 300
+ #define MAX_ROW_BARREL 300
+ #define MAX_COLUMN_CAP 300
+ #define MAX_ROW_CAP 300
+ #define FIRST_FED_ID 1200
+ #define LAST_FED_ID 1338
+ #else
+ const int n_of_FEDs = 41;
+ const int n_of_Channels = 36;
+ const int fedIdBpixMax = 32;
+ const bool phase1 = false;
+ #endif
+ }
 //Decoding helper functions
 class MyDecode {
 public:
