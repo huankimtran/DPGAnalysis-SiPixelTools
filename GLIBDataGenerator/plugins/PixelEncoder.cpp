@@ -113,8 +113,10 @@ void Pixel_Store::process() {
                   hhROChit = roc.second.size();
                 }
               }
-              if (chHits > hhChanhit)
+              if (chHits > hhChanhit){
                 hhChanhit = chHits;
+                hhChanID = ch.first;
+              }
               chHits = 0;
               chpLay_[lay.first][ch.first] += 1;
             }

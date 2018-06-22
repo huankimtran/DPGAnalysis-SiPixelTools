@@ -54,6 +54,8 @@ class Pixel_Store {
   // highest hits roc hits
   // number of hits in above roc 
   int hhROChit;
+  // Channel with highest hits
+  int hhChanID;
   // highest number of hits in a single channel
   int hhChanhit;
   // highest average fed id
