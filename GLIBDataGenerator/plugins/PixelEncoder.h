@@ -54,6 +54,8 @@ class Pixel_Store {
   // highest hits roc hits
   // number of hits in above roc 
   int hhROChit;
+  // highest number of hits in a single channel
+  int hhChanhit;
   // highest average fed id
   // highest avg hit per event fed id
   int haFEDID;
@@ -92,7 +94,8 @@ class Pixel_Store {
   // populates histograms in future
   // returns number for error checking
   void process();
-  void encode(int targetFED);
+  void encode(int targetFED, std::string title_name = "SRAM");
+  void graph();
 };
 
 #endif
