@@ -68,7 +68,7 @@
 #include <vector>
 #include <utility>
 #include <map>
-#include "Encoder.h"
+#include "PixelEncoder.h"
 using namespace std;
 
 typedef int FEDID;
@@ -732,6 +732,7 @@ private:
 	vector<pair<int,int>> HitFedCount;
 	MAP fedMap;
 	Pixel_Store pix;
+	int numbEvent;
 };
 
 GLIBDataGenerator::GLIBDataGenerator(const edm::ParameterSet& iConfig)
@@ -753,6 +754,8 @@ GLIBDataGenerator::GLIBDataGenerator(const edm::ParameterSet& iConfig)
 	//Make sure you have the translation.dat file in the folder you run cmsRun
 	fedMap=MakeCablingMap();
 	//Configure the pixel class with the given map
+	//Initialize the counter
+	numbEvent=0;
 }
 
 
@@ -774,6 +777,9 @@ void
 GLIBDataGenerator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 	cout<<"GLIBDataGenerator analyze is being run"<<endl;
+	//increase event counter
+	numbEvent++;
+	//Object to get out fed raw data
 	edm::Handle<FEDRawDataCollection> buffers;	
 	//Get raw data
 	iEvent.getByToken(rawData , buffers);
@@ -796,8 +802,12 @@ GLIBDataGenerator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 	for (int fedId = fedIds.first; fedId < (fedIds.second + 1); fedId++) {
 		//Get the raw data associating with the given fedId
 		const FEDRawData& rawData = buffers->FEDData( fedId ); 
-		//FED with no data should not be checked
-		if(rawData.size()==0) continue;
+		//FED with no data should not be checked but data should be saved
+		if(rawData.size()==0){
+			//adding empty event
+			pix.add(event,fedId,0,0,0,0,0,0);
+			continue;
+		}
 		//Increase the number of events this FED has hit
 		HitFedCount[fedId-FIRST_FED_ID].first++;
 		//Getting the header of the raw data
@@ -929,14 +939,17 @@ GLIBDataGenerator::endJob()
 	int fedMax=-1;
 	for(unsigned int i=0;i<HitFedCount.size();i++){
 		if(!HitFedCount[i].first) continue;
-		if((HitFedCount[i].second/HitFedCount[i].first)>max){
+		if((HitFedCount[i].second/numbEvent)>max){
 			fedMax=i;
-			max=HitFedCount[i].second/HitFedCount[i].first;
+			max=HitFedCount[i].second/numbEvent;
 		}
 	}
+	//Convert index to FED ID
 	fedMax+=1200;
+	//Annoucing
 	cout<<"FED ID with the highest average hit:"<<fedMax<<endl;
 	cout<<"The average hit of that FED is:"<<max<<endl;
+	//Filtering and put data of the FED with highest average hit into the encoder to generate GLIB files
 	cout<<"Filtering out the data of the FED with the highest average hit"<<endl;
 	for(unsigned int i=0;i<tree->GetEntries();i++){
 		tree->GetEntry(i);
@@ -948,7 +961,7 @@ GLIBDataGenerator::endJob()
 	fs->file().Close();
 	//Generating GLIB bin files
 	cout<<"Generating GLIB bin files"<<endl;
-	encoder(fedMax,pix.storage);
+	pix.encode(fedMax);
 }
 //Get layer from fedID and channel
 Int_t GLIBDataGenerator::getLayer(Int_t fedID,Int_t channel){
