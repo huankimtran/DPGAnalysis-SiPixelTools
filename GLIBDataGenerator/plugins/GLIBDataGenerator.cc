@@ -733,12 +733,14 @@ private:
 	MAP fedMap;
 	Pixel_Store pix;
 	int numbEvent;
+	string binFileName;
 };
 
 GLIBDataGenerator::GLIBDataGenerator(const edm::ParameterSet& iConfig)
 {
 	//Get out the name of the object need to be filtered in root files
 	string label = iConfig.getUntrackedParameter<std::string>("InputLabel");
+	binFileName=iConfig.getUntrackedParameter<std::string>("OutputBinFIleName");	
 	//Get the raw data collected from the FED throught the object with the name specified
 	//in the label variable
 	rawData = consumes<FEDRawDataCollection>(label);
@@ -988,7 +990,7 @@ GLIBDataGenerator::endJob()
 	fs->file().Close();
 	//Generating GLIB bin files
 	cout<<"Generating GLIB bin files"<<endl;
-	pix.encode(fedMax);
+	pix.encode(fedMax,binFileName);
 	cout<<"Done generating GLIB bin files"<<endl;
 }
 //Get layer from fedID and channel

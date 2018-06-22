@@ -101,7 +101,8 @@ process.an = cms.EDAnalyzer("GLIBDataGenerator",  #Name of the EDAnlyzer class
 	Timing = cms.untracked.bool(False),
     IncludeErrors = cms.untracked.bool(True),
     InputLabel = cms.untracked.string('rawDataCollector'),#the name of the module creating the object holding the FED raw data. This is to filter out the object we need from the events
-    CheckPixelOrder = cms.untracked.bool(False),
+    OutputBinFileName=cms.untrached.string('SRAM'),
+	CheckPixelOrder = cms.untracked.bool(False),
     Verbosity = cms.untracked.int32(0),
     PrintThreshold = cms.untracked.double(0.001)
 )
