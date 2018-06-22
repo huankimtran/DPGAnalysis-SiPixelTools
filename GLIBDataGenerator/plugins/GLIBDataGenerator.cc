@@ -740,7 +740,7 @@ GLIBDataGenerator::GLIBDataGenerator(const edm::ParameterSet& iConfig)
 {
 	//Get out the name of the object need to be filtered in root files
 	string label = iConfig.getUntrackedParameter<std::string>("InputLabel");
-	binFileName=iConfig.getUntrackedParameter<std::string>("OutputBinFIleName");	
+	binFileName=iConfig.getUntrackedParameter<std::string>("OutputBinFileName");	
 	//Get the raw data collected from the FED throught the object with the name specified
 	//in the label variable
 	rawData = consumes<FEDRawDataCollection>(label);
