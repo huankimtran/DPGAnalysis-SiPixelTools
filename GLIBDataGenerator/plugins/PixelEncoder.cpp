@@ -326,6 +326,7 @@ void Pixel_Store::graph() {
               if (roc.first > 0) {
                 hChanROC[chan.first - 1]->Fill(roc.first, roc.second.size());
                 hFEDChan->Fill(chan.first, roc.second.size());
+
               }
             }
           }
@@ -418,8 +419,8 @@ int main(int argc, char* argv[]) {
            "\n\nRoc with highest hits for single event in FED: ch " +
            std::to_string(pStore.hhROCID.first) + " roc " + std::to_string(pStore.hhROCID.second) +
            "\nWith a hit count of: " + std::to_string(pStore.hhROChit) +
-           "\n\nChannel with Highest hits is: Channel " + hhChanID +
-           "\nWith a hit count of: " + std::to_string(hhChanhit);
+           "\n\nChannel with Highest hits is: Channel " + std::to_string(pStore.hhChanID) +
+           "\nWith a hit count of: " + std::to_string(pStore.hhChanhit);
 
   std::cout << output;   // print to terminal
   outputFile << output;  // print to file
