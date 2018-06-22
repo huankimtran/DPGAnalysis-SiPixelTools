@@ -417,7 +417,9 @@ int main(int argc, char* argv[]) {
            "\nWith an avg hit count of: " + std::to_string(pStore.haFEDhit) +
            "\n\nRoc with highest hits for single event in FED: ch " +
            std::to_string(pStore.hhROCID.first) + " roc " + std::to_string(pStore.hhROCID.second) +
-           "\nWith a hit count of: " + std::to_string(pStore.hhROChit);
+           "\nWith a hit count of: " + std::to_string(pStore.hhROChit) +
+           "\n\nChannel with Highest hits is: Channel " + hhChanID +
+           "\nWith a hit count of: " + std::to_string(hhChanhit);
 
   std::cout << output;   // print to terminal
   outputFile << output;  // print to file
