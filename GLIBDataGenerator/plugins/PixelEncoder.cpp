@@ -317,6 +317,7 @@ void Pixel_Store::graph() {
     hChanROC[i] = new TH2D(name.c_str(), title.c_str(), 8, 1., 9., (hhROChit + 10), -0.5, ((float)hhROChit + 9.5));
     hChanROC[i]->SetOption("COLZ");
   }
+  int chanHits = 0;
   for (auto const& event : storage) {
     for (auto const& fed : event.second) {
       if (fed.first == haFEDID) {
@@ -325,10 +326,11 @@ void Pixel_Store::graph() {
             for (auto const& roc : chan.second) {
               if (roc.first > 0) {
                 hChanROC[chan.first - 1]->Fill(roc.first, roc.second.size());
-                hFEDChan->Fill(chan.first, roc.second.size());
-
               }
+              chanHits += roc.second.size();
             }
+            hFEDChan->Fill(chan.first, chanHits);
+            chanHits = 0;
           }
         }
       }
