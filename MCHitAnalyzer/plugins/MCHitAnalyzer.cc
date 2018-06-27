@@ -71,9 +71,9 @@
 
 //Configure inclusion from MyDecode.h 
 #define PHASE1
-#include "MyDecode.h"
-#include "MyDecodeGlobalVariables.h"
-#include "Pixel.h"
+#include "../../Library/MyDecode.h"
+#include "../../Library/MyDecodeGlobalVariables.h"
+#include "../../Library/Pixel.h"
 using namespace std;
 
 typedef int FEDID;
