@@ -12,7 +12,7 @@ process = cms.Process("GLIBGenerator")
 
 # -1 means processing all events
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(3)
+    input = cms.untracked.int32(1)
 )
 #Setting up a service to write out the root file containing histograms
 process.TFileService = cms.Service("TFileService",
