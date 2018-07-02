@@ -68,7 +68,12 @@
 #include <vector>
 #include <utility>
 #include <map>
+
 #include "PixelEncoder.h"
+#ifndef PHASE1
+#define PHASE1
+#endif
+
 #include "Pixel.h"
 #include "MyDecode.h"
 #include "MyDecodeGlobalVariables.h"
