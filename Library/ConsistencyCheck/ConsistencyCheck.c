@@ -47,16 +47,17 @@ int main(int argc, char* argv[]){
 		//file name (default has prefix SRAM)
 		std::string s="SRAM";
 		//If bin files have different prefix, use it
-		if(argc > 1)
+		if(argc > 1){
 			s=std::string(argv[1]);
+			std::cout<<"File name prefix is "<<s<<std::endl;
+		}
 		//Bin files fstream
 		std::ifstream f;
-		const char* file_name=(s+HIT+std::to_string(i)+EXT).c_str();
-		std::cout<<"Opening file "<<file_name<<std::endl;
-		f.open(file_name,std::ios::binary | std::ios::in);
+		std::cout<<"Opening file "<<s+HIT+std::to_string(i)+EXT<<std::endl;
+		f.open(s+HIT+std::to_string(i)+EXT,std::ios::binary | std::ios::in);
 		//Check for file openning errors
 		if(!f.is_open()){
-			std::cout<<"Error openning file"<<std::endl;
+			std::cout<<"Error opening file "<<s+HIT+std::to_string(i)+EXT<<std::endl;
 			return -1;
 		}
 		std::vector<HitCount> hits[NUMB_CHANNEL_PER_FILE];
