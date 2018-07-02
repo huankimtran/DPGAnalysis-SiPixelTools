@@ -122,6 +122,7 @@ MAP MakeCablingMap(){
 		getline(f,s);
 	}
 	cout<<"Fed cabling map is done"<<endl;
+	cout<<"Number of Channel"<<n_of_Channels<<endl;
 	return cableMap;
 }
 using reco::TrackCollection;
