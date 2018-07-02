@@ -9,4 +9,7 @@ extern int pix0;
 extern int count0;
 extern int countDecodeErrors1;
 extern int countDecodeErrors2;
+	#ifndef PHASE1
+		#define PHASE1
+	#endif
 #endif
