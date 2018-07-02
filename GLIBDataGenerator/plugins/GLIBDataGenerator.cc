@@ -68,6 +68,9 @@
 #include <vector>
 #include <utility>
 #include <map>
+
+#define PHASE1
+
 #include "PixelEncoder.h"
 using namespace std;
 
