@@ -22,7 +22,7 @@
 //    row, col is bit shifted
 //    row is shifted 16, col is shifted 8
 using Pixels = std::unordered_map<uint32_t, uint32_t>;
-// roc id as key and row map as value
+// roc id as key and pixel map as value
 using ROCs = std::map<int, Pixels>;
 // channel id as key and roc map
 using Chans = std::map<int, ROCs>;
@@ -44,7 +44,7 @@ class Pixel_Store {
   // roc high hits per block
   // id: block id in hits files
   // value: if a roc in block has irregularly high hits
-  bool rocHigHitpBlock_[12] = {false};
+  bool rocHigHitpBlock_[3] = {false};
   // channel id occurrences per layer
   std::map<int, std::map<int, int> > chpLay_;
  public:
